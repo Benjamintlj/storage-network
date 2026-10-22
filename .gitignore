@@ -7,4 +7,3 @@ node-data/
 *.key
 .env
 .env.*
-.idea/
