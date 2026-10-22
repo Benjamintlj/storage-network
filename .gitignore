@@ -1,0 +1,10 @@
+.DS_Store
+*.test
+*.out
+coverage/
+bin/
+node-data/
+*.key
+.env
+.env.*
+.idea/
