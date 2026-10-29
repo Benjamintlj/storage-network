@@ -1,0 +1,234 @@
+/* This CSS is by Ben Lewis-Jones */
+/* Obsidian CSS pack */
+
+:root {
+  --paragraph-color: #d0d0d0;
+  --highlight: #ffffff;
+  --primary: #aaaaaa;
+  --dark: #333333;
+}
+
+/* Colour class: red */
+.red {
+  --paragraph-color: #d0d0d0;
+  --primary: #e94b33;
+  --dark: #111111;
+  --highlight: #ffcccc;
+}
+
+/* Colour class: blue */
+.blue {
+  --paragraph-color: #d0d0d0;
+  --primary: #007acc;
+  --dark: #111111;
+  --highlight: #cce7ff;
+}
+
+/* Colour class: green */
+.green {
+  --paragraph-color: #d0d0d0;
+  --primary: #1d7631;
+  --dark: #111111;
+  --highlight: #ccffcc;
+}
+
+/* Colour class: purple */
+.purple {
+  --paragraph-color: #d0d0d0;
+  --primary: #6a0dad;
+  --dark: #111111;
+  --highlight: #f2ccf2;
+}
+
+/* Colour class: orange */
+.orange {
+  --paragraph-color: #d0d0d0;
+  --primary: #ff6600;
+  --dark: #111111;
+  --highlight: #ffe5cc;
+}
+
+/* Colour class: teal */
+.teal {
+  --paragraph-color: #d0d0d0;
+  --primary: #20c997;
+  --dark: #111111;
+  --highlight: #ccf5f5;
+}
+
+/* Colour class: yellow */
+.yellow {
+  --paragraph-color: #d0d0d0;
+  --primary: #ffc107;
+  --dark: #111111;
+  --highlight: #ffffcc;
+}
+
+.plain {
+  --highlight: #ffffff;
+  --header-font-family: "Consolas", "Menlo", "Monaco", "Courier New", monospace;
+  font-family: var(--header-font-family);
+  color: var(--paragraph-color);
+  background-color: var(--dark);
+  --text-normal: var(--paragraph-color);
+  --text-muted: var(--paragraph-color);
+  --text-faint: var(--paragraph-color);
+  --checklist-done-color: var(--paragraph-color);
+  --metadata-label-text-color: var(--paragraph-color);
+  --metadata-input-text-color: var(--paragraph-color);
+  --tag-color: var(--dark);
+  --tag-background: var(--primary);
+  --hr-color: var(--primary);
+  --blockquote-border-color: var(--primary);
+  --interactive-accent: var(--primary);
+  --collapse-icon-color-collapsed: var(--primary);
+  --checkbox-color: var(--primary);
+  --checkbox-marker-color: var(--dark);
+  --checkbox-color-hover: var(--highlight);
+  --checkbox-border-color: var(--highlight);
+  --list-marker-color: var(--paragraph-color);
+  --code-background: black;
+  --code-normal: var(--primary);
+  --background-modifier-border-focus: var(--primary);
+  --background-modifier-border: color-mix(in srgb, var(--highlight) 60%, transparent);
+  --background-modifier-hover: color-mix(in srgb, var(--highlight) 60%, transparent);
+  --pill-cover-hover: color-mix(in srgb, var(--highlight) 60%, transparent);
+}
+
+.plain .header-base {
+  font-family: var(--header-font-family);
+  color: var(--primary);
+  margin: 0.5em 0;
+  padding: 0;
+}
+
+/* swapped H4 styling into H1 */
+.plain :is(h1, .HyperMD-header.HyperMD-header-1) {
+  font-family: var(--header-font-family);
+  background-color: var(--primary);
+  color: var(--dark);
+  margin: 0.5em 0;
+  width: fit-content;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 8px;
+  font-size: 1.833rem; /* using H2's size */
+}
+
+/* H2 style */
+.plain :is(h2, .HyperMD-header.HyperMD-header-2) {
+  font-family: var(--header-font-family);
+  color: var(--primary);
+  margin: 0.5em 0;
+  padding: 0;
+  font-size: 1.667rem;
+}
+
+/* H3 style */
+.plain :is(h3, .HyperMD-header.HyperMD-header-3) {
+  font-family: var(--header-font-family);
+  background-color: var(--primary);
+  color: var(--dark);
+  margin: 0.5em 0;
+  width: fit-content;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 8px;
+  font-size: 1.5rem;
+}
+
+/* H4 style */
+.plain :is(h4, .HyperMD-header.HyperMD-header-4) {
+  font-family: var(--header-font-family);
+  color: var(--primary);
+  margin: 0.5em 0;
+  padding: 0;
+  font-size: 1.333rem;
+}
+
+/* H5 style */
+.plain :is(h5, .HyperMD-header.HyperMD-header-5) {
+  font-family: var(--header-font-family);
+  background-color: var(--primary);
+  color: var(--dark);
+  margin: 0.5em 0;
+  width: fit-content;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 8px;
+  font-size: 1.167rem;
+}
+
+/* H6 style */
+.plain :is(h6, .HyperMD-header.HyperMD-header-6) {
+  font-family: var(--header-font-family);
+  color: var(--primary);
+  margin: 0.5em 0;
+  padding: 0;
+  font-size: 3rem;
+  text-align: center;
+}
+
+/* Emphasis formatting gradient */
+.plain .cm-em {
+  display: inline-block;
+  background: linear-gradient(to right, #ffffff, #008080);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Separator gradient */
+.plain hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, var(--dark), var(--primary), var(--dark));
+  margin: 1em 0;
+}
+
+/* ====================== Checklists: make them clearly visible ====================== */
+.plain .task-list-item-checkbox,
+.plain input[type="checkbox"] {
+  /* Ensure the checkbox itself is visible in both edit & preview */
+  accent-color: var(--primary);
+  width: 1.1em;
+  height: 1.1em;
+  margin-right: 0.5em;
+  border: 2px solid transparent;
+  background-color: var(--dark);
+  box-shadow: none;
+}
+
+/* Unchecked state */
+.plain input[type="checkbox"]:not(:checked),
+.plain .task-list-item-checkbox:not(:checked) {
+  background-color: var(--dark);
+  border-color: var(--paragraph-color, #d0d0d0) !important;
+}
+
+/* Checked state */
+.plain input[type="checkbox"]:checked,
+.plain .task-list-item-checkbox:checked {
+  background-color: var(--primary);
+  border-color: transparent !important;
+}
+
+/* Keep checked task text fully readable (no dimming) */
+.plain .task-list-item.is-checked,
+.plain .task-list-item.is-checked > .task-list-item-inner,
+.plain .cm-strikethrough {
+  opacity: 1 !important;
+  color: var(--paragraph-color) !important;
+}
+
+/* Make the strikethrough itself visible */
+.plain .task-list-item.is-checked > .task-list-item-inner {
+  text-decoration-color: var(--primary);
+}

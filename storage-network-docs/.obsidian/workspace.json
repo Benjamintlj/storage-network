@@ -1,0 +1,217 @@
+{
+  "main": {
+    "id": "00011c0c9d72e957",
+    "type": "split",
+    "children": [
+      {
+        "id": "5e97f1bed4367cde",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b77e255fbf662b6c",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "02 - Architecture/00 - Architecture Diagrams/00 - Services/Ultimate Architecture Diagram.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Ultimate Architecture Diagram"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "85fbf5044e104438",
+    "type": "split",
+    "children": [
+      {
+        "id": "c210a010eb5c4396",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "17c602d925bb7971",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "17c82468a3123eb2",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "File explorer"
+            }
+          },
+          {
+            "id": "c58b6a8b515a8736",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8dfe80eda26267d4",
+    "type": "split",
+    "children": [
+      {
+        "id": "cd4e1ce8012d6228",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "82c17a6032f14d5b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "99 - Meta/00 - Templates/Service.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Service"
+            }
+          },
+          {
+            "id": "c8a6058cd5ffcbde",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "99 - Meta/00 - Templates/Service.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Service"
+            }
+          },
+          {
+            "id": "8136d2a01c3c5b09",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3ebb53d3fc107e65",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "99 - Meta/00 - Templates/Service.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Service"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "templates:Insert template": false,
+      "iconic:Open rulebook": false,
+      "command-palette:Open command palette": false,
+      "obsidian42-text-transporter:Text Transporter": false,
+      "canvas:Create new canvas": false,
+      "templater-obsidian:Templater": false,
+      "daily-notes:Open today's note": false
+    }
+  },
+  "active": "17c82468a3123eb2",
+  "lastOpenFiles": [
+    "00 - Active/04 - Random Drawings",
+    "99 - Meta/01 - Excalidraw/00 - Drawing Icons/drwnio.excalidrawlib",
+    "99 - Meta/01 - Excalidraw/00 - Drawing Icons/architecture-diagram-components.excalidrawlib",
+    "99 - Meta/01 - Excalidraw/00 - Drawing Icons/algorithms-and-data-structures-arrays-matrices-trees.excalidrawlib",
+    "99 - Meta/01 - Excalidraw/00 - Drawing Icons/UML-ER-library.excalidrawlib",
+    "99 - Meta/01 - Excalidraw/00 - Drawing Icons",
+    "02 - Architecture/00 - Architecture Diagrams/00 - Services/Ultimate Architecture Diagram.md",
+    "99 - Meta/01 - Excalidraw/Drawing 2025-05-04 12.41.14.excalidraw.md",
+    "02 - Architecture/00 - Architecture Diagrams/Drawing 2025-05-04 12.34.16.excalidraw.md",
+    "02 - Architecture/00 - Architecture Diagrams/02 - DB group",
+    "02 - Architecture/00 - Architecture Diagrams/00 - Services",
+    "02 - Architecture/00 - Architecture Diagrams/01 - DB group",
+    "02 - Architecture/01 - Service Group Name/01 - Service Sub-Group Name/Ben's Service.md",
+    "README/00 - Getting Started.md",
+    "README/01 - Project Structure.md",
+    "99 - Meta/00 - Templates/Readme.md",
+    "README/02 - Creating new notes.md",
+    "README/03 - Architecture Diagrams.md",
+    "99 - Meta/00 - Templates/Service.md",
+    "00 - Active/03 - Upcoming Work/01 - Epics/2025-05-04 - new note.md",
+    "99 - Meta/00 - Templates/Epic.md",
+    "99 - Meta/00 - Templates/Ticket.md",
+    "00 - Active/03 - Upcoming Work/01 - Epics/2025-05-04 - Ticket name thing.md",
+    "00 - Active/03 - Upcoming Work/01 - Epics/2025-05-04 - Epic Name.md",
+    "99 - Meta/00 - Templates/Quick Note.md",
+    "00 - Active/01 - Tickets/Untitled.md",
+    "00 - Active/00 - Quick Notes/2025-05-04.md",
+    "00 - Active/03 - Upcoming Work/01 - Epics/Epic Example.md",
+    "README/04 - Contributions.md",
+    "README.md",
+    "README",
+    "09 - Project Guide",
+    "00 - Projects/01 - Tickets/Untitled.md",
+    "2025-05-04.md",
+    "Untitled 2.canvas",
+    "Untitled 1.canvas",
+    "Untitled.canvas",
+    "99 - Meta/01 - Excalidraw/Drawing 2025-05-04 10.16.08.excalidraw.md",
+    "99 - Meta/02 - How to use/How to use Md.md"
+  ]
+}
