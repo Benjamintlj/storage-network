@@ -33,8 +33,7 @@ func Open(dir string) (*NonVolatileStore, error) {
 		return nil, ErrIsFileNotDir
 	}
 
-	nvs := NonVolatileStore{dir: dir}
-	return &nvs, nil
+	return &NonVolatileStore{dir: dir}, nil
 }
 
 func (nvs *NonVolatileStore) Get(id string) ([]byte, error) {
@@ -58,9 +57,7 @@ func (nvs *NonVolatileStore) Put(id string, b []byte) error {
 	if err != nil {
 		return err
 	}
-	defer func() {
-		_ = file.Close()
-	}()
+	defer file.Close()
 
 	_, err = file.Write(b)
 	return err
