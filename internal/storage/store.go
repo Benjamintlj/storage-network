@@ -1,6 +1,7 @@
 package store
 
 import (
+	"bytes"
 	"errors"
 	"io"
 	"os"
@@ -53,7 +54,11 @@ func (nvs *NonVolatileStore) Get(id string) ([]byte, error) {
 func (nvs *NonVolatileStore) Put(id string, b []byte) error {
 	file, err := os.OpenFile(filepath.Join(nvs.dir, id), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o600)
 	if errors.Is(err, os.ErrExist) {
-		return ErrAlreadyExists
+		data, _ := os.ReadFile(filepath.Join(nvs.dir, id))
+		if bytes.Equal(data, b) {
+			return ErrAlreadyExists
+		}
+		return ErrConflict
 	}
 	if err != nil {
 		return err
