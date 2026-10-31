@@ -1,25 +1,67 @@
 package store
 
+import (
+	"errors"
+	"io"
+	"os"
+	"path/filepath"
+)
+
+type nvsError string
+
+func (err nvsError) Error() string {
+	return string(err)
+}
+
+var (
+	ErrAlreadyExists = nvsError("Id already exists")
+	ErrDirNotExists  = nvsError("Directory does not exist")
+	ErrIsFileNotDir  = nvsError("Expected directory not a file")
+)
+
 type NonVolatileStore struct {
+	dir string
 }
 
 func Open(dir string) (*NonVolatileStore, error) {
-	return nil, nil
+	info, err := os.Stat(dir)
+	if errors.Is(err, os.ErrNotExist) {
+		return nil, ErrDirNotExists
+	} else if err != nil {
+		return nil, err
+	} else if !info.IsDir() {
+		return nil, ErrIsFileNotDir
+	}
+
+	nvs := NonVolatileStore{dir: dir}
+	return &nvs, nil
 }
 
 func (nvs *NonVolatileStore) Get(id string) ([]byte, error) {
-	return nil, nil
+	file, err := os.Open(filepath.Join(nvs.dir, id))
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		_ = file.Close()
+	}()
+
+	data, err := io.ReadAll(file)
+	return data, err
 }
 
-// Todo: Write persistently
-// Todo: Duplicate write (same bytes & id), are successful, one object
-// Todo: Different bytes same identifier, conflict
-// Todo: Unknown identifier, unknown
-// Todo: Do not allow writes over the size of 8MiB, this memory must be pre-allocated
-
-// Todo: Empty object, binary object, text
-// Todo: Stop the program completely, objects should still be readable
-// Todo: Block ids that may act as paths such as `../`
 func (nvs *NonVolatileStore) Put(id string, b []byte) error {
-	return nil
+	file, err := os.OpenFile(filepath.Join(nvs.dir, id), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o600)
+	if errors.Is(err, os.ErrExist) {
+		return ErrAlreadyExists
+	}
+	if err != nil {
+		return err
+	}
+	defer func() {
+		_ = file.Close()
+	}()
+
+	_, err = file.Write(b)
+	return err
 }
