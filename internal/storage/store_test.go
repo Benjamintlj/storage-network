@@ -2,6 +2,7 @@ package store_test
 
 import (
 	"bytes"
+	"errors"
 	"os"
 	"testing"
 
@@ -46,7 +47,36 @@ func TestBehaviour(t *testing.T) {
 }
 
 func TestPut(t *testing.T) {
-	t.Run("", func(t *testing.T) {
+	t.Run("duplicate_write_returns_err", func(t *testing.T) {
+		const dir = "./test-store"
+		if err := os.MkdirAll(dir, 0o700); err != nil {
+			t.Fatalf("Failed to create the temp dir %q", err)
+		}
+		defer func() {
+			err := os.RemoveAll(dir)
+			if err != nil {
+				t.Fatalf("Failed to remove the temp dir %q", err)
+			}
+		}()
 
+		nonVolatileStore, err := store.Open(dir)
+		if err != nil {
+			t.Fatalf("Failed to open test directory %q", err)
+		}
+
+		id := "id"
+		content := []byte("test input")
+		err = nonVolatileStore.Put(id, content)
+		if err != nil {
+			t.Fatalf("Put failed early with error %q", err)
+		}
+
+		err = nonVolatileStore.Put(id, content)
+		if !errors.Is(err, store.ErrAlreadyExists) {
+			if err == nil {
+				t.Fatalf("Put failed no error, want: %q", store.ErrAlreadyExists)
+			}
+			t.Fatalf("Put failed with wrong error, want: %q got: %q", store.ErrAlreadyExists, err)
+		}
 	})
 }
