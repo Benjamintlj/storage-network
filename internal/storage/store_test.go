@@ -33,47 +33,46 @@ func TestBehaviour(t *testing.T) {
 	})
 }
 
-func TestPut(t *testing.T) {
-	t.Run("duplicate_write_returns_err", func(t *testing.T) {
-		nonVolatileStore, closer := CreateStore(t)
-		defer closer()
+func TestPutExpectError(t *testing.T) {
+	type putCall struct {
+		value         []byte
+		expectedError error
+	}
 
-		id := "id"
-		content := []byte("test input")
-		err := nonVolatileStore.Put(id, content)
-		if err != nil {
-			t.Fatalf("Put failed early with error %q", err)
-		}
+	tests := []struct {
+		name  string
+		calls []putCall
+	}{
+		{
+			name: "duplicate_write_returns_err",
+			calls: []putCall{
+				{value: []byte("test input"), expectedError: nil},
+				{value: []byte("test input"), expectedError: store.ErrAlreadyExists},
+			},
+		},
+		{
+			name: "duplicate_write_different_bytes_returns_conflict_err",
+			calls: []putCall{
+				{value: []byte("test1 input"), expectedError: nil},
+				{value: []byte("test2 input"), expectedError: store.ErrConflict},
+			},
+		},
+	}
 
-		err = nonVolatileStore.Put(id, content)
-		if !errors.Is(err, store.ErrAlreadyExists) {
-			if err == nil {
-				t.Fatalf("Put failed no error, want: %q", store.ErrAlreadyExists)
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			nonVolatileStore, closer := CreateStore(t)
+			defer closer()
+
+			const id = "id"
+			for callIndex, call := range test.calls {
+				err := nonVolatileStore.Put(id, call.value)
+				if !errors.Is(err, call.expectedError) {
+					t.Fatalf("Put call %d: want error %v, got %v", callIndex+1, call.expectedError, err)
+				}
 			}
-			t.Fatalf("Put failed with wrong error, want: %q got: %q", store.ErrAlreadyExists, err)
-		}
-	})
-
-	t.Run("duplicate_write_different_bytes_returns_conflict_err", func(t *testing.T) {
-		nonVolatileStore, closer := CreateStore(t)
-		defer closer()
-
-		id := "id"
-		content1 := []byte("test1 input")
-		content2 := []byte("test2 input")
-		err := nonVolatileStore.Put(id, content1)
-		if err != nil {
-			t.Fatalf("Put failed early with error %q", err)
-		}
-
-		err = nonVolatileStore.Put(id, content2)
-		if !errors.Is(err, store.ErrConflict) {
-			if err == nil {
-				t.Fatalf("Put failed no error, want: %q", store.ErrConflict)
-			}
-			t.Fatalf("Put failed with wrong error, want: %q got: %q", store.ErrAlreadyExists, err)
-		}
-	})
+		})
+	}
 }
 
 // Helpers
