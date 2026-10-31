@@ -25,7 +25,7 @@ func TestBehaviour(t *testing.T) {
 		// get it
 		storedContent, err := nonVolatileStore.Get(id)
 		if err != nil {
-			t.Fatalf("Get failed wih error %q", err)
+			t.Fatalf("Get failed with error %q", err)
 		}
 		if !bytes.Equal(storedContent, content) {
 			t.Errorf("Content returned did not match input content want %q, got %q", content, storedContent)
@@ -72,6 +72,18 @@ func TestPutExpectError(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestGet(t *testing.T) {
+	const id = "id"
+
+	nonVolatileStore, closer := CreateStore(t)
+	defer closer()
+
+	_, err := nonVolatileStore.Get(id)
+	if !errors.Is(err, store.ErrUnknownId) {
+		t.Fatalf("Get failed with the wrong error got %q, want %q", err, store.ErrUnknownId)
 	}
 }
 
