@@ -17,6 +17,7 @@ var (
 	ErrAlreadyExists = nvsError("Id already exists")
 	ErrDirNotExists  = nvsError("Directory does not exist")
 	ErrIsFileNotDir  = nvsError("Expected directory not a file")
+	ErrConflict      = nvsError("Conflict, identifier already exists with different data")
 )
 
 type NonVolatileStore struct {
