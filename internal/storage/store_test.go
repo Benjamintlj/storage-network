@@ -11,26 +11,13 @@ import (
 
 func TestBehaviour(t *testing.T) {
 	t.Run("put_then_get_returns_same_bytes", func(t *testing.T) {
-		const dir = "./test-store"
-		if err := os.MkdirAll(dir, 0o700); err != nil {
-			t.Fatalf("Failed to create the temp dir %q", err)
-		}
-		defer func() {
-			err := os.RemoveAll(dir)
-			if err != nil {
-				t.Fatalf("Failed to remove the temp dir %q", err)
-			}
-		}()
-
-		nonVolatileStore, err := store.Open(dir)
-		if err != nil {
-			t.Fatalf("Failed to open test directory %q", err)
-		}
+		nonVolatileStore, closer := CreateStore(t)
+		defer closer()
 
 		// store with Put
 		id := "id"
 		content := []byte("test input")
-		err = nonVolatileStore.Put(id, content)
+		err := nonVolatileStore.Put(id, content)
 		if err != nil {
 			t.Fatalf("Put failed with error %q", err)
 		}
@@ -48,25 +35,12 @@ func TestBehaviour(t *testing.T) {
 
 func TestPut(t *testing.T) {
 	t.Run("duplicate_write_returns_err", func(t *testing.T) {
-		const dir = "./test-store"
-		if err := os.MkdirAll(dir, 0o700); err != nil {
-			t.Fatalf("Failed to create the temp dir %q", err)
-		}
-		defer func() {
-			err := os.RemoveAll(dir)
-			if err != nil {
-				t.Fatalf("Failed to remove the temp dir %q", err)
-			}
-		}()
-
-		nonVolatileStore, err := store.Open(dir)
-		if err != nil {
-			t.Fatalf("Failed to open test directory %q", err)
-		}
+		nonVolatileStore, closer := CreateStore(t)
+		defer closer()
 
 		id := "id"
 		content := []byte("test input")
-		err = nonVolatileStore.Put(id, content)
+		err := nonVolatileStore.Put(id, content)
 		if err != nil {
 			t.Fatalf("Put failed early with error %q", err)
 		}
@@ -79,4 +53,25 @@ func TestPut(t *testing.T) {
 			t.Fatalf("Put failed with wrong error, want: %q got: %q", store.ErrAlreadyExists, err)
 		}
 	})
+}
+
+// Helpers
+func CreateStore(tb testing.TB) (*store.NonVolatileStore, func()) {
+	const dir = "./test-store"
+	if err := os.MkdirAll(dir, 0o700); err != nil {
+		tb.Fatalf("Failed to create the temp dir %q", err)
+	}
+	closer := func() {
+		err := os.RemoveAll(dir)
+		if err != nil {
+			tb.Fatalf("Failed to remove the temp dir %q", err)
+		}
+	}
+
+	nonVolatileStore, err := store.Open(dir)
+	if err != nil {
+		tb.Fatalf("Failed to open test directory %q", err)
+	}
+
+	return nonVolatileStore, closer
 }
