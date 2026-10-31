@@ -53,6 +53,27 @@ func TestPut(t *testing.T) {
 			t.Fatalf("Put failed with wrong error, want: %q got: %q", store.ErrAlreadyExists, err)
 		}
 	})
+
+	t.Run("duplicate_write_different_bytes_returns_conflict_err", func(t *testing.T) {
+		nonVolatileStore, closer := CreateStore(t)
+		defer closer()
+
+		id := "id"
+		content1 := []byte("test1 input")
+		content2 := []byte("test2 input")
+		err := nonVolatileStore.Put(id, content1)
+		if err != nil {
+			t.Fatalf("Put failed early with error %q", err)
+		}
+
+		err = nonVolatileStore.Put(id, content2)
+		if !errors.Is(err, store.ErrConflict) {
+			if err == nil {
+				t.Fatalf("Put failed no error, want: %q", store.ErrConflict)
+			}
+			t.Fatalf("Put failed with wrong error, want: %q got: %q", store.ErrAlreadyExists, err)
+		}
+	})
 }
 
 // Helpers
