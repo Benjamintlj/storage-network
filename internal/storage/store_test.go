@@ -31,6 +31,28 @@ func TestBehaviour(t *testing.T) {
 			t.Errorf("Content returned did not match input content want %q, got %q", content, storedContent)
 		}
 	})
+
+	t.Run("put_empty_array_returns_same_bytes", func(t *testing.T) {
+		nonVolatileStore, closer := CreateStore(t)
+		defer closer()
+
+		// store with Put
+		id := "id"
+		content := make([]byte, 10)
+		err := nonVolatileStore.Put(id, content)
+		if err != nil {
+			t.Fatalf("Put failed with error %q", err)
+		}
+
+		// get it
+		storedContent, err := nonVolatileStore.Get(id)
+		if err != nil {
+			t.Fatalf("Get failed with error %q", err)
+		}
+		if !bytes.Equal(storedContent, content) {
+			t.Errorf("Content returned did not match input content want %q, got %q", content, storedContent)
+		}
+	})
 }
 
 func TestPutExpectError(t *testing.T) {
