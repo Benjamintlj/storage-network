@@ -41,7 +41,9 @@ func Open(dir string) (*NonVolatileStore, error) {
 
 func (nvs *NonVolatileStore) Get(id string) ([]byte, error) {
 	file, err := os.Open(filepath.Join(nvs.dir, id))
-	if err != nil {
+	if os.IsNotExist(err) {
+		return nil, ErrUnknownId
+	} else if err != nil {
 		return nil, err
 	}
 	defer func() {
