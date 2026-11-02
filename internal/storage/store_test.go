@@ -60,7 +60,7 @@ func TestPutExpectError(t *testing.T) {
 		{
 			name: "write_over_max_size_returns_write_too_large_err",
 			calls: []putCall{
-				{value: make([]byte, store.MaxSize), expectedError: store.ErrWriteTooLarge},
+				{value: make([]byte, store.MaxSize+1), expectedError: store.ErrWriteTooLarge},
 			},
 		},
 	}

@@ -58,6 +58,10 @@ func (nvs *NonVolatileStore) Get(id string) ([]byte, error) {
 }
 
 func (nvs *NonVolatileStore) Put(id string, b []byte) error {
+	if len(b) > MaxSize {
+		return ErrWriteTooLarge
+	}
+
 	path := filepath.Join(nvs.dir, id)
 	file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o600)
 	if errors.Is(err, os.ErrExist) {
