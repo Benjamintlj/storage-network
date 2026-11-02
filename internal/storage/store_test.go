@@ -3,6 +3,7 @@ package store_test
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"os"
 	"testing"
 
@@ -110,4 +111,16 @@ func TestBehaviour(t *testing.T) {
 			}
 		})
 	}
+}
+
+func ExampleNonVolatileStore() {
+	dir, _ := os.MkdirTemp("", "demo")
+	nonVolatileStore, _ := store.Open(dir)
+
+	_ = nonVolatileStore.Put("id", []byte("hello there"))
+
+	content, _ := nonVolatileStore.Get("id")
+	fmt.Println(string(content))
+
+	// output: hello there
 }

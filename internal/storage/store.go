@@ -29,6 +29,7 @@ type NonVolatileStore struct {
 	dir string
 }
 
+// Open creates a NonVolatileStore struct that can be used to store and retrieve values
 func Open(dir string) (*NonVolatileStore, error) {
 	info, err := os.Stat(dir)
 	if errors.Is(err, os.ErrNotExist) {
@@ -42,6 +43,7 @@ func Open(dir string) (*NonVolatileStore, error) {
 	return &NonVolatileStore{dir: dir}, nil
 }
 
+// Get gets the byte array associated to the id
 func (nvs *NonVolatileStore) Get(id string) ([]byte, error) {
 	file, err := os.Open(filepath.Join(nvs.dir, id))
 	if os.IsNotExist(err) {
@@ -57,6 +59,7 @@ func (nvs *NonVolatileStore) Get(id string) ([]byte, error) {
 	return data, err
 }
 
+// Put stores a byte array against the id provided
 func (nvs *NonVolatileStore) Put(id string, b []byte) error {
 	if len(b) > MaxSize {
 		return ErrWriteTooLarge
