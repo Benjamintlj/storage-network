@@ -64,9 +64,8 @@ func TestPutExpectError(t *testing.T) {
 			nonVolatileStore, closer := CreateStore(t)
 			defer closer()
 
-			const id = "id"
 			for callIndex, call := range test.calls {
-				err := nonVolatileStore.Put(id, call.value)
+				err := nonVolatileStore.Put("id", call.value)
 				if !errors.Is(err, call.expectedError) {
 					t.Fatalf("Put call %d: want error %v, got %v", callIndex+1, call.expectedError, err)
 				}
@@ -76,15 +75,15 @@ func TestPutExpectError(t *testing.T) {
 }
 
 func TestGet(t *testing.T) {
-	const id = "id"
+	t.Run("unknown_identifier_returns_error", func(t *testing.T) {
+		nonVolatileStore, closer := CreateStore(t)
+		defer closer()
 
-	nonVolatileStore, closer := CreateStore(t)
-	defer closer()
-
-	_, err := nonVolatileStore.Get(id)
-	if !errors.Is(err, store.ErrUnknownId) {
-		t.Fatalf("Get failed with the wrong error got %q, want %q", err, store.ErrUnknownId)
-	}
+		_, err := nonVolatileStore.Get("id")
+		if !errors.Is(err, store.ErrUnknownId) {
+			t.Fatalf("Get failed with the wrong error got %q, want %q", err, store.ErrUnknownId)
+		}
+	})
 }
 
 // Helpers
