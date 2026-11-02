@@ -57,6 +57,12 @@ func TestPutExpectError(t *testing.T) {
 				{value: []byte("test2 input"), expectedError: store.ErrConflict},
 			},
 		},
+		{
+			name: "write_over_max_size_returns_write_too_large_err",
+			calls: []putCall{
+				{value: make([]byte, store.MaxSize), expectedError: store.ErrWriteTooLarge},
+			},
+		},
 	}
 
 	for _, test := range tests {

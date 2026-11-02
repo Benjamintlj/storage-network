@@ -20,7 +20,10 @@ var (
 	ErrIsFileNotDir  = nvsError("Expected directory not a file")
 	ErrConflict      = nvsError("Conflict, identifier already exists with different data")
 	ErrUnknownId     = nvsError("Unknown identifier")
+	ErrWriteTooLarge = nvsError("Write too large, must not exceed MaxSize")
 )
+
+const MaxSize = 8 << 20 // 8MiB
 
 type NonVolatileStore struct {
 	dir string
